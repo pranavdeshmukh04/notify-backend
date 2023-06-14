@@ -11,7 +11,7 @@ app.use(cors())
 
 app.use('/users', userRouter)
 app.use('/api/notes', noteRouter)
-
+app.use('/healthcheck', require('./routes/healthchecker'));
 
 const URI = process.env.MONGODB_URL
 
