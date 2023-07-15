@@ -11,4 +11,10 @@ router.route('/:id')
     .put(auth, noteCtrl.updateNote)
     .delete(auth, noteCtrl.deleteNote)
 
+router.route('/:id/bookmark')
+    .put(auth, noteCtrl.bookmarkNote);
+
+router.route('/bookmarked')
+    .get(auth, noteCtrl.getBookmarkedNotes);
+
 module.exports = router

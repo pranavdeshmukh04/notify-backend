@@ -13,6 +13,10 @@ const noteSchema = new mongoose.Schema({
         type: String,
         required: Date.now
     },
+    bookmarked: { 
+        type: Boolean, 
+        default: false
+    },
     user_id:{
         type: String,
         required: true

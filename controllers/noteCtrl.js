@@ -53,7 +53,29 @@ const noteCtrl = {
         } catch (error) {
             return res.status(500).json({msg: error.message})
         }
-    }
+    },
+    bookmarkNote: async (req, res) => {
+        try {
+            const note = await Notes.findById(req.params.id)
+            if(!note) 
+                return res.status(400).json({msg: "Note does not exist."})
+            await Notes.findOneAndUpdate({_id: req.params.id},{
+                bookmarked: !note.bookmarked
+            })
+            res.json({msg: "Note bookmarked"})
+        }  
+        catch (error) {
+            return res.status(500).json({msg: error.message})
+        }
+    },
+    getBookmarkedNotes: async (req, res) => {
+        try {
+            const notes = await Notes.find({user_id: req.user.id, bookmarked: true})
+            res.json(notes)
+        } catch (error) {
+            return res.status(500).json({msg: error.message})
+        }
+    },
 }
 
 module.exports = noteCtrl
